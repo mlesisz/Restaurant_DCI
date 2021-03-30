@@ -15,29 +15,29 @@ namespace Restaurant_DCI.Roles
 
     public static class LoginUserTraits
     {
-        public static HttpContext Login(this ILoginUser user, DB_Entities _db)
+        public static bool Login(this ILoginUser loginData, DB_Entities _db)
         {
-            if(user is Account _user)
+            if(loginData is LoginViewModel _loginData)
             {
-                _user.Password = GetMD5(_user.Password);
-                _user = _db.Users.FirstOrDefault(s => s.Email.Equals(_user.Email) && s.Password.Equals(_user.Password));
+                _loginData.Password = GetMD5(_loginData.Password);
+                Account user = _db.Users.FirstOrDefault(s => s.Email.Equals(_loginData.Email) && s.Password.Equals(_loginData.Password));
                 //var data = _db.Users.Where(s => s.Email.Equals(_user.Email) && s.Password.Equals(_user.Password)).ToList();
-                if (_user != null)
+                if (user != null)
                 {
                     HttpContext context = HttpContext.Current;
-                    context.Session["FullName"] = _user.FirstName + " " + _user.LastName;
-                    context.Session["Email"] = _user.Email;
-                    context.Session["idUser"] = _user.idUser;
-                    return context;
+                    context.Session["FullName"] = user.FirstName + " " + user.LastName;
+                    context.Session["Email"] = user.Email;
+                    context.Session["idUser"] = user.idUser;
+                    return true;
                 }
                 else
                 {
-                    return null;
+                    return false;
                 }
             }
             else
             {
-                return null;
+                return false;
             }
         }
 

@@ -60,7 +60,7 @@ namespace Restaurant_DCI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Account _user/*string email, string password*/)
+        public ActionResult Login(LoginViewModel LoginData/*string email, string password*/)
         {
             if (ModelState.IsValid)
             {
@@ -69,9 +69,9 @@ namespace Restaurant_DCI.Controllers
                     Email = email,
                     Password = password
                 };*/
-                HttpContext context = new LoginContex(_user, _db).DoIt();
-                if (context != null)
-                { 
+                bool SucessfulLogin = new LoginContex(LoginData, _db).DoIt();
+                if (SucessfulLogin)
+                {
                     return RedirectToAction("Index");
                 }
                 else
@@ -109,12 +109,12 @@ namespace Restaurant_DCI.Controllers
     {
         public ILoginUser User { get; private set; }
         public DB_Entities Db { get; private set; }
-        public LoginContex(Account user, DB_Entities _db)
+        public LoginContex(LoginViewModel user, DB_Entities _db)
         {
             User = user;
             Db = _db;
         }
-        public HttpContext DoIt()
+        public bool DoIt()
         {
             return User.Login(Db);
         }
@@ -123,8 +123,8 @@ namespace Restaurant_DCI.Controllers
 
     public class RegisterContex
     {
-        public IRegisterUser User {get; private set;}
-        public DB_Entities Db{ get; private set; }
+        public IRegisterUser User { get; private set; }
+        public DB_Entities Db { get; private set; }
         public RegisterContex(Account user, DB_Entities _db)
         {
             User = user;
