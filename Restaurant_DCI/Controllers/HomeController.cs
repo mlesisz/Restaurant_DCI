@@ -38,7 +38,7 @@ namespace Restaurant_DCI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var check = new RegisterContex(_user, _db).DoIt();
+                var check = new RegisterContex(_user, _db).SuccessfulRegiser();
                 if (check == true)
                 {
                     return RedirectToAction("Index");
@@ -69,7 +69,7 @@ namespace Restaurant_DCI.Controllers
                     Email = email,
                     Password = password
                 };*/
-                bool SucessfulLogin = new LoginContex(LoginData, _db).DoIt();
+                bool SucessfulLogin = new LoginContex(LoginData, _db).SuccessfulLogin();
                 if (SucessfulLogin)
                 {
                     return RedirectToAction("Index");
@@ -114,7 +114,7 @@ namespace Restaurant_DCI.Controllers
             User = user;
             Db = _db;
         }
-        public bool DoIt()
+        public bool SuccessfulLogin()
         {
             return User.Login(Db);
         }
@@ -130,7 +130,7 @@ namespace Restaurant_DCI.Controllers
             User = user;
             Db = _db;
         }
-        public bool DoIt()
+        public bool SuccessfulRegiser()
         {
             return User.Register(Db);
         }
