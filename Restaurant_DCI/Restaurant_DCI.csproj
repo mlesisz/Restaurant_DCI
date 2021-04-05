@@ -209,6 +209,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -224,6 +225,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Contex\BrowsingMenuContex.cs" />
+    <Compile Include="Contex\LoginContex.cs" />
+    <Compile Include="Contex\RegisterContex.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,7 +235,9 @@
     <Compile Include="Models\DB_Entities.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles\IBrowsingMemuProduct.cs" />
     <Compile Include="Roles\ILoginUser.cs" />
     <Compile Include="Roles\IRegisterUser.cs" />
   </ItemGroup>

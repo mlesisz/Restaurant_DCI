@@ -7,7 +7,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
-            <div class="container">
+            <div class="container-fluid">
 
                 @Html.ActionLink("Restauracja", "Index","Home", new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -33,7 +33,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

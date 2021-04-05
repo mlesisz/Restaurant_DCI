@@ -11,9 +11,11 @@ namespace Restaurant_DCI.Models
     {
         public DB_Entities() : base("Db_website") { }
         public DbSet<Account> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //Database.SetInitializer<demoEntities>(null);
+            modelBuilder.Entity<Product>().ToTable("Products");
             modelBuilder.Entity<Account>().ToTable("Users");
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
