@@ -9,7 +9,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
             <div class="container-fluid">
 
-                @Html.ActionLink("Restauracja", "Index","Home", new { @class = "navbar-brand" })
+                @Html.ActionLink("Restauracja", "Index","Home",null, new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,12 +20,12 @@
                     <div class="navbar-nav ml-auto">
                         @if (Session["FullName"] == null)
                         {
-                            @Html.ActionLink("Logowanie", "Login", "Home", new { @class = "nav-link text-light" })
-                            @Html.ActionLink("Rejestracja", "Register", "Home", new { @class = "nav-link text-light" })
+                            @Html.ActionLink("Logowanie", "Login", "Account",null, new { @class = "nav-link text-light" })
+                            @Html.ActionLink("Rejestracja", "Register", "Account",null, new { @class = "nav-link text-light" })
                         }
                         else
                         {
-                            @Html.ActionLink("Wyloguj się", "Logout", "Home", new { @class = "nav-link text-light" })
+                            @Html.ActionLink("Wyloguj się", "Logout", "Account",null, new { @class = "nav-link text-light" })
                         }
 
                     </div>
