@@ -1,20 +1,35 @@
-﻿@model IEnumerable<Restaurant_DCI.Models.Product>
+﻿@model List<Restaurant_DCI.Models.Product>
+@{ 
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "ProductsList"
+    };
+}
+
 @if (Model != null)
 {
     <h3>@ViewBag.category</h3>
-    foreach (var item in Model)
-    {
-        <div class="list-group-item list-group-item-action">
-            <div class="row">
-                <div class="col-xl-10">
-                    <h5 class="alert-heading">@Html.DisplayTextFor(m => item.Name)</h5>
-                    @Html.DisplayTextFor(m => item.Description)
-                </div>
-                <div class="col-xl-2 text-right"><p>@Html.DisplayTextFor(m => item.Price)zł</p></div>
+    
+        foreach (var item in Model)
+        {
+<a class="nav-link" href="@Url.Action("AddOrderItem","User",routeValues: new { productId = item.IdProduct })">
+    <div class="list-group-item list-group-item-action">
+        <div class="row">
+            <div class="col-xl-10">
+                <h5 class="alert-heading">@Html.DisplayTextFor(m => item.Name)</h5>
+                @Html.DisplayTextFor(m => item.Description)
             </div>
 
+            <div class="col-xl-2 text-right">
+                <p>@Html.DisplayTextFor(m => item.Price)zł</p>
+            </div>
         </div>
-    }
+
+    </div>
+</a>
+        }
 }
 else
 {

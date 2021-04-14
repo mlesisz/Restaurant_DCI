@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Restaurant_DCI.Models.Product>
+﻿@model Tuple<List<Restaurant_DCI.Models.Product>, Restaurant_DCI.Models.Order>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,12 +23,12 @@
 
         </div>
     </div>
-    <div class="col-xl-8 list-group" id="ProductsList">
+    <div class="col-xl-7 list-group" id="ProductsList">
         
-        @Html.Partial("~/Views/Shared/_Products.cshtml", Model)
+        @Html.Partial("~/Views/Shared/_Products.cshtml", Model.Item1)
     </div>
-    <div class="col-xl-2" id="ShoppingBasket">
-        
+    <div class="col-xl-3" id="ShoppingBasket">
+        @Html.Partial("~/Views/Shared/_ShoppingBasket.cshtml",Model.Item2)
     </div>
 </div>
 

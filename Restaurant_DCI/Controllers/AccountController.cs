@@ -18,14 +18,14 @@ namespace Restaurant_DCI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Account _user)
+        public ActionResult Register(RegistrantAccount _user)
         {
             if (ModelState.IsValid)
             {
                 var check = new RegisterContex(_user, _db).SuccessfulRegiser();
                 if (check == true)
                 {
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Login","Account");
                 }
                 else
                 {

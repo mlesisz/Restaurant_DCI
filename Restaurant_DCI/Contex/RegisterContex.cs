@@ -7,7 +7,7 @@ namespace Restaurant_DCI.Contex
     {
         public IRegisterUser User { get; private set; }
         public DB_Entities Db { get; private set; }
-        public RegisterContex(Account user, DB_Entities _db)
+        public RegisterContex(IRegisterUser user, DB_Entities _db)
         {
             User = user;
             Db = _db;
