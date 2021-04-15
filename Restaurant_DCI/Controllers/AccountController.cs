@@ -18,7 +18,7 @@ namespace Restaurant_DCI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Account _user)
+        public ActionResult Register(RegistrantAccount _user)
         {
             if (ModelState.IsValid)
             {
