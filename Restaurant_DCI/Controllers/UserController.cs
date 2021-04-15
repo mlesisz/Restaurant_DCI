@@ -13,16 +13,20 @@ namespace Restaurant_DCI.Controllers
         private readonly DB_Entities _db = new DB_Entities();
         public ActionResult Home(string category = "Dania główne")
         {
-            Product product = new Product();
-            product.Category = category;
+            Product product = new Product
+            {
+                Category = category
+            };
             ViewBag.category = category;
             return View(new BrowsingMenuContex(product, _db).FindProducts());
         }
         [HttpPost]
         public ActionResult ViewCategory(string category = "Dania główne")
         {
-            Product product = new Product();
-            product.Category = category;
+            Product product = new Product
+            {
+                Category = category
+            };
             ViewBag.category = category;
             return PartialView("_Products", new BrowsingMenuContex(product, _db).FindProducts());
         }

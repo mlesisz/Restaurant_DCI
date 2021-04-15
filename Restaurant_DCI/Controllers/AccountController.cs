@@ -1,5 +1,6 @@
 ﻿using Restaurant_DCI.Contex;
 using Restaurant_DCI.Models;
+using Restaurant_DCI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Restaurant_DCI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegistrantAccount _user)
+        public ActionResult Register(Account _user)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +49,12 @@ namespace Restaurant_DCI.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool SucessfulLogin = new LoginContex(LoginData, _db).SuccessfulLogin();
+                Account loginAccount = new Account
+                {
+                    Email = LoginData.Email,
+                    Password = LoginData.Password
+                };
+                bool SucessfulLogin = new LoginContex(loginAccount, _db).SuccessfulLogin();
                 if (SucessfulLogin)
                 {
                     return RedirectToAction("Index","Home");

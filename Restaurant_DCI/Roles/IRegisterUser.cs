@@ -16,7 +16,8 @@ namespace Restaurant_DCI.Roles
     {
         public static bool Register(this IRegisterUser user, DB_Entities _db)
         {
-            if (user is Account _user)
+            Account _user = user as Account;
+            if (_user != null)
             {
                 var check = _db.Users.FirstOrDefault(s => s.Email == _user.Email);
                 if (check == null)

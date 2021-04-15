@@ -1,4 +1,5 @@
 ﻿using Restaurant_DCI.Models;
+using Restaurant_DCI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,13 @@ namespace Restaurant_DCI.Roles
     {
         public static bool Login(this ILoginUser loginData, DB_Entities _db)
         {
-            if(loginData is LoginViewModel _loginData)
+            if(loginData is Account _loginData)
             {
                 _loginData.Password = GetMD5(_loginData.Password);
                 Account user = _db.Users.FirstOrDefault(s => s.Email.Equals(_loginData.Email) && s.Password.Equals(_loginData.Password));
-                //var data = _db.Users.Where(s => s.Email.Equals(_user.Email) && s.Password.Equals(_user.Password)).ToList();
                 if (user != null)
                 {
                     HttpContext context = HttpContext.Current;
-                    context.Session["FullName"] = user.FirstName + " " + user.LastName;
-                    context.Session["Email"] = user.Email;
                     context.Session["idUser"] = user.idUser;
                     return true;
                 }

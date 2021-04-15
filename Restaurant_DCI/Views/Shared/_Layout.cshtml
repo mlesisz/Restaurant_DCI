@@ -20,7 +20,7 @@
                     <div class="navbar-nav">
                     </div>
                     <div class="navbar-nav ml-auto">
-                        @if (Session["FullName"] == null)
+                        @if (Session["idUser"] == null)
                         {
                             @Html.ActionLink("Logowanie", "Login", "Account",null, new { @class = "nav-link text-light" })
                             @Html.ActionLink("Rejestracja", "Register", "Account",null, new { @class = "nav-link text-light" })

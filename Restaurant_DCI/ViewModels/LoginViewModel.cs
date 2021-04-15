@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using Restaurant_DCI.Roles;
 
-namespace Restaurant_DCI.Models
+namespace Restaurant_DCI.ViewModels
 {
-    public class LoginViewModel : ILoginUser
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Musisz wprowadzić e-mail")]
         [Display(Name = "Email")]
