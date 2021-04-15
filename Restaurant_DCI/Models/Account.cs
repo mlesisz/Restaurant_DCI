@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Restaurant_DCI.Models
 {
-    public abstract class Account 
+    public class Account : IRegisterUser, ILoginUser
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -36,13 +36,10 @@ namespace Restaurant_DCI.Models
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasło i hasło potwierdzające nie pasują do siebie.")]
         public string ConfirmPassword { get; set; }
-    }
-    
-    public class RegistrantAccount : Account, IRegisterUser
-    {
-    }
 
-    public class LoginAccount : Account, ILoginUser 
-    {
-    }
+        public string FullName()
+        {
+            return this.FirstName + " " + this.LastName;
+        }
+    } 
 }
