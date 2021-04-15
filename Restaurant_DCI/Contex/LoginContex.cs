@@ -7,7 +7,7 @@ namespace Restaurant_DCI.Contex
     {
         public ILoginUser User { get; private set; }
         public DB_Entities Db { get; private set; }
-        public LoginContex(LoginViewModel user, DB_Entities _db)
+        public LoginContex(ILoginUser user, DB_Entities _db)
         {
             User = user;
             Db = _db;

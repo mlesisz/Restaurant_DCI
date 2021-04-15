@@ -7,7 +7,7 @@ using Restaurant_DCI.Roles;
 
 namespace Restaurant_DCI.Models
 {
-    public class LoginViewModel : ILoginUser
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Musisz wprowadzić e-mail")]
         [Display(Name = "Email")]

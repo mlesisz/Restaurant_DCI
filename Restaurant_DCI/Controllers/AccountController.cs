@@ -48,7 +48,10 @@ namespace Restaurant_DCI.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool SucessfulLogin = new LoginContex(LoginData, _db).SuccessfulLogin();
+                LoginAccount loginAccount = new LoginAccount();
+                loginAccount.Email = LoginData.Email;
+                loginAccount.Password = LoginData.Password;
+                bool SucessfulLogin = new LoginContex(loginAccount, _db).SuccessfulLogin();
                 if (SucessfulLogin)
                 {
                     return RedirectToAction("Index","Home");
