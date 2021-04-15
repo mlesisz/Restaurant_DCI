@@ -31,14 +31,15 @@ namespace Restaurant_DCI.Models
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
-    }
-    
-    public class RegistrantAccount : Account, IRegisterUser
-    {
+
         [NotMapped]
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasło i hasło potwierdzające nie pasują do siebie.")]
         public string ConfirmPassword { get; set; }
+    }
+    
+    public class RegistrantAccount : Account, IRegisterUser
+    {
     }
 
     public class LoginAccount : Account, ILoginUser 
