@@ -1,0 +1,73 @@
+﻿@model Restaurant_DCI.Models.CartItem
+
+@{
+    ViewBag.Title = "AddToCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row justify-content-xl-center">
+    <div class="col-xl-10">
+        @using (Html.BeginForm("AddToCart","Cart",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Product.IdProduct)
+            <div class="card">
+                <div class="card-header">
+                    Dodaj do zamówienia
+                </div>
+                <div class="card-body">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="row">
+                            <div class="col-xl-10">
+                                <h5 class="alert-heading">@Html.DisplayTextFor(m => m.Product.Name)</h5>
+                                @Html.DisplayTextFor(m => m.Product.Description)
+                            </div>
+                            <div class="col-xl-2 text-right"><p id="textPrice">@Html.DisplayTextFor(m => m.Product.Price)zł</p></div>
+                        </div>
+                    </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group col-xl-2">
+                        @Html.LabelFor(model => model.Quantity)
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @id = "textQuantity", @type = "number", @min = "0", @step = "1", @vaule = "1" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-xl-2">
+                        @Html.LabelFor(model => model.TotalPrice)
+                        @Html.TextBoxFor(model => model.TotalPrice, new { @class = "form-control", @readonly = "readonly", @id = "textTotalPrice" })
+                        @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-xl-2">
+                        <div>
+                            <input type="submit" value="Dodaj" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-2">
+                        @Html.ActionLink(linkText: "Wróć do menu.", actionName: "Home", controllerName: "User", new { category = (Model.Product.Category) }, null)
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+@section ScriptsBottom{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input[type=number]").change(
+                function () {
+                    CalculateTotalPrice();
+                }
+            );
+    });
+        function CalculateTotalPrice() {
+            var Price = parseFloat("@Html.DisplayTextFor(m => m.Product.Price)".replace(",", "."));
+            var Quantity = $("#textQuantity").val();
+            var TotalPrice = Quantity * Price;
+
+            $("#textTotalPrice").val((parseFloat(TotalPrice).toFixed(2)).replace(".",","));
+        }
+    </script>
+}
+
