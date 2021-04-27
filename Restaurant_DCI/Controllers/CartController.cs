@@ -18,9 +18,45 @@ namespace Restaurant_DCI.Controllers
             SessionManager = new SessionManager();
         }
 
-        public ActionResult AddToCart(int productId)
+        public ActionResult ConfirmOrder()
         {
-            Product product = _db.Products.FirstOrDefault(p => p.IdProduct== productId);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmOrder(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                bool saved;
+
+                saved = new PlaceAnOrderContex(order,SessionManager,_db).SaveOrder();
+                if (saved)
+                {
+                    return RedirectToAction("Home","User");
+                }
+                else
+                {
+                    ViewBag.error = "Coś poszło nie tak.";
+                    return View();
+                }
+            }
+            return View();
+        }
+
+        public ActionResult RemoveFromCart(int productId = 1)
+        {
+            Product product = _db.Products.FirstOrDefault(p => p.ProductId == productId);
+            CartItem cartItem = new CartItem {
+                Product = product
+            };
+            new PlaceAnOrderContex(cartItem, SessionManager).RemoveCartItemFromSession();
+            return RedirectToAction("Home","User");
+        }
+
+        public ActionResult AddToCart(int productId=1)
+        {
+            Product product = _db.Products.FirstOrDefault(p => p.ProductId== productId);
             CartItem cartItem = new CartItem
             {
                 Product = product,
@@ -29,7 +65,12 @@ namespace Restaurant_DCI.Controllers
             CartItem pom = new PlaceAnOrderContex(cartItem, SessionManager).FindCartItemInSession();
             if (pom != null)
             {
+                ViewBag.InCart = true;
                 cartItem = pom;
+            }
+            else
+            {
+                ViewBag.InCart = false;
             }
             return View(cartItem);
         }
@@ -39,13 +80,20 @@ namespace Restaurant_DCI.Controllers
         {
             if (ModelState.IsValid)
             {
-                cartItem.Product = _db.Products.FirstOrDefault(p => p.IdProduct == cartItem.Product.IdProduct);
-                new PlaceAnOrderContex(cartItem, SessionManager).AddCartItemToSession();
+                if (cartItem.Quantity == 0)
+                {
+                    new PlaceAnOrderContex(cartItem, SessionManager).RemoveCartItemFromSession();
+                }
+                else
+                {
+                    cartItem.Product = _db.Products.FirstOrDefault(p => p.ProductId == cartItem.Product.ProductId);
+                    new PlaceAnOrderContex(cartItem, SessionManager).AddCartItemToSession();
+                }
                 return RedirectToAction("Home","User",new {category = cartItem.Product.Category });
             }
             else
             {
-                cartItem.Product = _db.Products.FirstOrDefault(p => p.IdProduct == cartItem.Product.IdProduct);
+                cartItem.Product = _db.Products.FirstOrDefault(p => p.ProductId == cartItem.Product.ProductId);
                 return View(cartItem);
             }
 

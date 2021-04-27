@@ -17,8 +17,8 @@ namespace Restaurant_DCI.Roles
         {
             if(cartItem is CartItem item && session is SessionManager sessionManager)
             {
-                List<CartItem> cart = GetCart(sessionManager);
-                CartItem cartItemSession = cart.Find(c=>c.Product.IdProduct==item.Product.IdProduct);
+                List<CartItem> cart = session.GetCart();
+                CartItem cartItemSession = cart.Find(c=>c.Product.ProductId==item.Product.ProductId);
 
                 if (cartItemSession != null)
                 {
@@ -32,37 +32,37 @@ namespace Restaurant_DCI.Roles
                 sessionManager.Set("CartItems",cart);
             }
         }
+        public static void RemoveCartItemFromSession(this IPlaceAnOrderCartItem cartItem, ISessionManager session)
+        {
+            if (cartItem is CartItem item && session is SessionManager sessionManager)
+            {
+                List<CartItem> cart = session.GetCart();
+                CartItem cartItemSession = cart.Find(c => c.Product.ProductId == item.Product.ProductId);
+                if(cartItemSession != null)
+                {
+                    cart.Remove(cartItemSession);
+                }
+            }
+
+        }
         public static CartItem FindItemCart(this IPlaceAnOrderCartItem cartItem, ISessionManager session)
         {
             if(cartItem is CartItem item)
             {
-                List<CartItem> cart = GetCart(session);
+                List<CartItem> cart = session.GetCart();
                 if (cart.Count == 0)
                 {
                     return null;
                 }
                 else
                 {
-                    return cart.Find(c => c.Product.IdProduct == item.Product.IdProduct);
+                    return cart.Find(c => c.Product.ProductId == item.Product.ProductId);
                 }
             }
             else
             {
                 return null;
             }
-        }
-        public static List<CartItem> GetCart(ISessionManager session)
-        {
-            List<CartItem> cart;
-            if (session.Get<List<CartItem>>("CartItems") == null)
-            {
-                cart = new List<CartItem>();
-            }
-            else
-            {
-                cart = session.Get<List<CartItem>>("CartItems") as List<CartItem>;
-            }
-            return cart;
         }
     }
 }

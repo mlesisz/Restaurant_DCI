@@ -216,6 +216,7 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Cart\AddToCart.cshtml" />
+    <Content Include="Views\Cart\ConfirmOrder.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -247,6 +248,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\SessionManager.cs" />
     <Compile Include="Roles\IPlaceAnOrderCartItem.cs" />
+    <Compile Include="Roles\IPlaceAnOrderOrderPlaced.cs" />
     <Compile Include="Roles\ISessionManager.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

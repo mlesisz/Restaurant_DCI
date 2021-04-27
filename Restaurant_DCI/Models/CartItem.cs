@@ -11,7 +11,7 @@ namespace Restaurant_DCI.Models
     {
         public Product Product { get; set; }
         [Display(Name = "Liczba")]
-        [Range(1,100)]
+        [Range(0,100)]
         public int Quantity { get; set; }
         [Display(Name = "Cena całkowita")]
         public decimal TotalPrice { get; set; }
