@@ -1,4 +1,5 @@
-﻿<html>
+﻿
+<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"] - Restaurant</title>
@@ -18,6 +19,11 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <div class="navbar-nav">
+                        @Html.ActionLink("Menu", "Home", "User", null, new { @class = "nav-link text-light" })
+                        @if (Session["Permissions"]!= null && Session["Permissions"].ToString() == "User")
+                        {
+                            @Html.ActionLink("Twoje zamówienia", "Orders", "User", null, new { @class = "nav-link text-light" })
+                        }
                     </div>
                     <div class="navbar-nav ml-auto">
                         @if (Session["idUser"] == null)

@@ -18,6 +18,21 @@ namespace Restaurant_DCI.Controllers
         {
             SessionManager = new SessionManager();
         }
+
+        public ActionResult Orders()
+        {
+            if (Session["idUser"] != null) {
+                int id = (int)Session["idUser"];
+                List<Order> orders = _db.Orders.Where(m => m.UserId.Equals(id)).ToList();
+                return View(orders);
+            }
+            else
+            {
+                List<Order> orders = new List<Order>();
+                return View(orders);
+            }
+            
+        }
         public ActionResult Home(string category = "Dania główne")
         {
             Product product = new Product

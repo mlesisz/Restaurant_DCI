@@ -217,6 +217,7 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Cart\AddToCart.cshtml" />
     <Content Include="Views\Cart\ConfirmOrder.cshtml" />
+    <Content Include="Views\User\Orders.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />

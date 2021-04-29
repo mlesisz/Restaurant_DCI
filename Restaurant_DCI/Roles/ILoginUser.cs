@@ -26,6 +26,7 @@ namespace Restaurant_DCI.Roles
                 {
                     HttpContext context = HttpContext.Current;
                     context.Session["idUser"] = user.idUser;
+                    context.Session["Permissions"] = user.Permissions;
                     return true;
                 }
                 else

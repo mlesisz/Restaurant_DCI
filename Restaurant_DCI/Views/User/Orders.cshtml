@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Restaurant_DCI.Models.Order>
+
+@{
+    ViewBag.Title = "Zamówienia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div >
+    <h4>Zamówienia</h4>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Data zamówenia</th>
+                <th>Koszt całkowity</th>
+                <th>Adres wysyłki</th>
+                <th>Status zamówienia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@Html.DisplayTextFor(m => item.DateCreated)</td>
+                    <td>@Html.DisplayTextFor(m => item.TotalPrice) zł</td>
+                    <td>@Html.DisplayTextFor(m => item.Address) @Html.DisplayTextFor(m => item.CodeAndCity)</td>
+                    <td>@Html.DisplayTextFor(m => item.OrderState)</td>
+                </tr>
+
+            }
+        </tbody>
+        </table>
+</div>
+

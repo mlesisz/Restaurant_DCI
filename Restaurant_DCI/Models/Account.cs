@@ -36,5 +36,14 @@ namespace Restaurant_DCI.Models
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasło i hasło potwierdzające nie pasują do siebie.")]
         public string ConfirmPassword { get; set; }
+        public Permissions Permissions { get; set; }
     } 
+
+    public enum Permissions
+    {
+        User,
+        Employee,
+        Chef,
+        RestaurantOwner
+    }
 }

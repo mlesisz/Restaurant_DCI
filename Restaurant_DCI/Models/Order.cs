@@ -60,10 +60,15 @@ namespace Restaurant_DCI.Models
 
     public enum OrderState
     {
+        [Display(Name ="Nowe")]
         New,
+        [Display(Name ="W trakcie przygotowania")]
         InProgress,
+        [Display(Name ="Gotowe")]
         Ready,
+        [Display(Name ="W trakcie wysyłki")]
         Sent,
+        [Display(Name ="Dostarczone")]
         Delivered
     }
 }
