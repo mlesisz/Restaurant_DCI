@@ -218,6 +218,7 @@
     <Content Include="Views\Cart\AddToCart.cshtml" />
     <Content Include="Views\Cart\ConfirmOrder.cshtml" />
     <Content Include="Views\User\Orders.cshtml" />
+    <Content Include="Views\Chef\AddOrEditProduct.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -234,11 +235,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contex\BrowsingMenuContex.cs" />
+    <Compile Include="Contex\EditingTheMenuContex.cs" />
     <Compile Include="Contex\LoginContex.cs" />
     <Compile Include="Contex\PlaceAnOrderContex.cs" />
     <Compile Include="Contex\RegisterContex.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ChefController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,6 +251,7 @@
     <Compile Include="Models\DB_Entities.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\SessionManager.cs" />
+    <Compile Include="Roles\IEditingTheMenuProduct.cs" />
     <Compile Include="Roles\IPlaceAnOrderCartItem.cs" />
     <Compile Include="Roles\IPlaceAnOrderOrderPlaced.cs" />
     <Compile Include="Roles\ISessionManager.cs" />

@@ -27,5 +27,17 @@ namespace Restaurant_DCI.Roles
             }
             
         }
+        public static Product FindProduct(this IBrowsingMemuProduct product, DB_Entities _db)
+        {
+            if (product is Product _product)
+            {
+                Product products = _db.Products.FirstOrDefault(s => s.ProductId == _product.ProductId);
+                return products;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

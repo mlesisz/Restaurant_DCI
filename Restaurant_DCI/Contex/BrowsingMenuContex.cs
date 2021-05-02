@@ -8,7 +8,7 @@ namespace Restaurant_DCI.Contex
     {
         public IBrowsingMemuProduct Product { get; private set; }
         public DB_Entities Db { get; private set; }
-        public BrowsingMenuContex(Product product, DB_Entities _db )
+        public BrowsingMenuContex(IBrowsingMemuProduct product, DB_Entities _db )
         {
             Product = product;
             Db = _db;
@@ -16,6 +16,10 @@ namespace Restaurant_DCI.Contex
         public List<Product> FindProducts()
         {
             return Product.FindProducts(Db);
+        }
+        public Product FindProduct()
+        {
+            return Product.FindProduct(Db);
         }
     }
 }

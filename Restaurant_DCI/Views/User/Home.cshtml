@@ -13,7 +13,7 @@
 <div class="row ">
     <div class="col-xl-2">
         <div>
-            @Ajax.ActionLink("Dania główne", "ViewCategory", "User", new { category = "Dania główne" }, ajaxOptions, new { @class = "list-group-item list-group-item-action"})
+            @Ajax.ActionLink("Dania główne", "ViewCategory", "User", new { category = "Dania główne" }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
             @Ajax.ActionLink("Przystawki", "ViewCategory", "User", new { category = "Przystawki" }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
             @Ajax.ActionLink("Sałaty", "ViewCategory", "User", new { category = "Sałaty" }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
             @Ajax.ActionLink("Zupy", "ViewCategory", "User", new { category = "Zupy" }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
@@ -24,44 +24,54 @@
         </div>
     </div>
     <div class="col-xl-7 list-group" id="ProductsList">
-        
+
         @Html.Partial("~/Views/Shared/_Products.cshtml", Model.Item1)
     </div>
-    <div class="col-xl-3" id="ShoppingBasket">
-        <h5>Twoje zamówienie</h5>
-        @if (Model.Item2.Item1.Count() > 0)
-        {
-            foreach (var item in Model.Item2.Item1)
+    @if (Session["Permissions"] != null && Session["Permissions"].ToString() == "Chef")
+    {
+        <div class="col-xl-3">
+            <input type="button" value="Dodaj nowe danie do menu" class="btn btn-success" onclick="location.href='@Url.Action("AddOrEditProduct","Chef")'" />
+        </div>
+    }
+    else
+    {
+        <div class="col-xl-3" id="ShoppingBasket">
+            <h5>Twoje zamówienie</h5>
+            @if (Model.Item2.Item1.Count() > 0)
             {
-                <a class="nav-link" href="@Url.Action("AddToCart","Cart",routeValues: new { productId = item.Product.ProductId })">
-                    <div class="list-group-item list-group-item-action">
-                        <div class="row">
-                            <div class="col-xl-2">
-                                <p>@Html.DisplayTextFor(p => item.Quantity)</p>
-                            </div>
-                            <div class="col-xl-6">
-                                <p style="font-size:75%;" class="font-weight-bold mb-0">@Html.DisplayTextFor(m => item.Product.Name)</p>
-                            </div>
-                            <div class="col-xl-4">
-                                <p>@Html.DisplayTextFor(m => item.TotalPrice)zł</p>
+                foreach (var item in Model.Item2.Item1)
+                {
+                    <a class="nav-link" href="@Url.Action("AddToCart","Cart",routeValues: new { productId = item.Product.ProductId })">
+                        <div class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-xl-2">
+                                    <p>@Html.DisplayTextFor(p => item.Quantity)</p>
+                                </div>
+                                <div class="col-xl-6">
+                                    <p style="font-size:75%;" class="font-weight-bold mb-0">@Html.DisplayTextFor(m => item.Product.Name)</p>
+                                </div>
+                                <div class="col-xl-4">
+                                    <p>@Html.DisplayTextFor(m => item.TotalPrice)zł</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                }
+                <h5>Suma @Html.DisplayTextFor(m => Model.Item2.Item2)</h5>
+                if (Session["IdUser"] == null)
+                {
+                    @Html.ActionLink("Zaloguj się i zamów", "Login", "Account") }
+                else
+                {
+                    <input type="button" value="Zamów" class="btn btn-success" onclick="location.href='@Url.Action("ConfirmOrder","Cart")'" />
+                }
             }
-            <h5>Suma @Html.DisplayTextFor(m => Model.Item2.Item2)</h5>
-            if (Session["IdUser"] == null)
-            {
-                @Html.ActionLink("Zaloguj się i zamów", "Login", "Account") }
             else
             {
-                <input type="button" value="Zamów" class="btn btn-success" onclick="location.href='@Url.Action("ConfirmOrder","Cart")'" />
+                <p>Dodaj dania do koszyka</p>
             }
-        }
-        else
-        {
-            <p>Dodaj dania do koszyka</p>
-        }
-    </div>
+        </div>
+    }
+
 </div>
 
