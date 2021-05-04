@@ -13,6 +13,7 @@ namespace Restaurant_DCI.Models
         [Display(Name = "Liczba")]
         [Range(0,100)]
         public int Quantity { get; set; }
+        [Required]
         [Display(Name = "Cena całkowita")]
         public decimal TotalPrice { get; set; }
         public CartItem()
