@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Restaurant_DCI.Roles;
 
 namespace Restaurant_DCI.Models
 {
-    public class OrderItem
+    public class OrderItem : ICompleteTheOrderOrderItem
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -16,6 +17,7 @@ namespace Restaurant_DCI.Models
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+        public bool Done { get; set; }
 
         public Product Product { get; set; }
         public Order Order { get; set; }

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     AjaxOptions ajaxOptions = new AjaxOptions 
     {
-        HttpMethod= "POST",
+        HttpMethod= "GET",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId= "ProductsList"
     };
@@ -23,7 +23,7 @@
 
         </div>
     </div>
-    <div class="col-xl-7 list-group" id="ProductsList">
+    <div class="col-xl-7 list-group navbar-nav-scroll" id="ProductsList">
 
         @Html.Partial("~/Views/Shared/_Products.cshtml", Model.Item1)
     </div>

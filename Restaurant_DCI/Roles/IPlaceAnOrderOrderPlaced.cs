@@ -33,7 +33,8 @@ namespace Restaurant_DCI.Roles
                         ProductId = item.Product.ProductId,
                         Quantity = item.Quantity,
                         Price = item.TotalPrice,
-                        OrderId = order.OrderId                        
+                        OrderId = order.OrderId,
+                        Done = false
                     };
                     order.TotalPrice += (item.Quantity * item.Product.Price );
 

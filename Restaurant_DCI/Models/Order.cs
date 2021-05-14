@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using Restaurant_DCI.Roles;
 
 namespace Restaurant_DCI.Models
 {
-    public class Order : IPlaceAnOrderOrderPlaced
+    public class Order : IPlaceAnOrderOrderPlaced, IBrowsingOrdersOrder
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -70,5 +71,16 @@ namespace Restaurant_DCI.Models
         Sent,
         [Display(Name ="Dostarczone")]
         Delivered
+    }
+    public static class EnumExtensions
+    {
+        public static string GetDisplayName(this Enum enumValue)
+        {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetName();
+        }
     }
 }

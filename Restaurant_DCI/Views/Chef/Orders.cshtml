@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Restaurant_DCI.Models.Order>
+@using Restaurant_DCI.Models
+
+@{
+    ViewBag.Title = "Zamówienia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "OrdersList"
+    };
+}
+
+<div class="row ">
+    <div class="col-xl-2">
+        <div>
+            @Ajax.ActionLink("Nowe zamówienia", "ViewOrders", "Chef", new { orderState = OrderState.New }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
+            @Ajax.ActionLink("W trakcie przygotownia", "ViewOrders", "Chef", new { orderState = OrderState.InProgress }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
+            @Ajax.ActionLink("Gotowe", "ViewOrders", "Chef", new { orderState = OrderState.Ready }, ajaxOptions, new { @class = "list-group-item list-group-item-action" })
+        </div>
+    </div>
+    <div class="col-xl-7 list-group navbar-nav-scroll" id="OrdersList">
+        @Html.Partial("~/Views/Shared/_Orders.cshtml", Model)
+
+    </div>
+    
+
+</div>
+

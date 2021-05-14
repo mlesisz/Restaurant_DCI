@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Restaurant_DCI.Models
 {
-    public class Account : IRegisterUser, ILoginUser
+    public class Account : IRegisterUser, ILoginUser, IBrowsingOrdersClient, IBrowsingOrdersChef
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

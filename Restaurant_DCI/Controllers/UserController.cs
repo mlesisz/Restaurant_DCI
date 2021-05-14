@@ -50,7 +50,7 @@ namespace Restaurant_DCI.Controllers
             }
             return View(tuple);
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult ViewCategory(string category = "Dania główne")
         {
             Product product = new Product
