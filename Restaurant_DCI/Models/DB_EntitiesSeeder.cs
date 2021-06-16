@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using Restaurant_DCI.Roles;
 
@@ -14,7 +15,8 @@ namespace Restaurant_DCI.Models
                 FirstName = "Szef",
                 LastName = "Kuchni",
                 Email = "Chef@wp.pl",
-                Password = RegisterUserTraits.GetMD5("Chef"),
+                Password = RegisterUserTraits.GetMD5("Chef12345"),
+                ConfirmPassword = RegisterUserTraits.GetMD5("Chef12345"),
                 Permissions = Permissions.Chef
             };
 
@@ -37,7 +39,17 @@ namespace Restaurant_DCI.Models
             new Product() { ProductId = 14, Name ="Sernik z białą czekoladą", Description = "Owocami i sorbetem malinowym", Category ="Desery", Price = 19.0m, Recipe="" },
             new Product() { ProductId = 15, Name ="Fasolka szparagowa", Description = "Fasolka szparagowa", Category ="Dodatki", Price = 10.0m, Recipe="" }, };
 
-
+            try
+            {
+                foreach (Product product in products)
+                {
+                    context.Products.Add(product);
+                }
+            }catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+            
 
             base.Seed(context);
         }

@@ -1,0 +1,58 @@
+﻿@model Restaurant_DCI.Models.Order
+@{
+    ViewBag.Title = "ConfirmOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-md-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Dane do zamówienia
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("ConfirmOrder", "Cart", FormMethod.Post))
+                {
+                    <span class="badge badge-danger">@ViewBag.error</span>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FullName)
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder = "Imie i Nazwisko" })
+                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Address)
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Adres" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CodeAndCity)
+                        @Html.TextBoxFor(m => m.CodeAndCity, new { @class = "form-control", @placeholder = "Kod pocztowy oraz Miejscowość" })
+                        @Html.ValidationMessageFor(m => m.CodeAndCity, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PhoneNumber)
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Numer Telefonu" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PaymentMethod)
+                        @Html.EnumDropDownListFor(m => m.PaymentMethod)
+                        @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Comment)
+                        @Html.TextBoxFor(m => m.Comment, new { @class = "form-control", @placeholder = "Uwagi do zamówienia" })
+                        @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "badge badge-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-primary" value="Potwierdź zamówienie" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,56 @@
+﻿
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Restaurant</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+            <div class="container-fluid">
+
+                @Html.ActionLink("Restauracja", "Index","Home",null, new { @class = "navbar-brand" })
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <div class="navbar-nav">
+                        @Html.ActionLink("Menu", "Home", "User", null, new { @class = "nav-link text-light" })
+                        @if (Session["Permissions"] != null && Session["Permissions"].ToString() == "User")
+                        {
+                            @Html.ActionLink("Twoje zamówienia", "Orders", "User", null, new { @class = "nav-link text-light" })
+                        }
+                        @if (Session["Permissions"] != null && Session["Permissions"].ToString() == "Chef")
+                        {
+                            @Html.ActionLink("Zamówienia", "Orders", "Chef", null, new { @class = "nav-link text-light" })
+                        }
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                        @if (Session["idUser"] == null)
+                        {
+                            @Html.ActionLink("Logowanie", "Login", "Account",null, new { @class = "nav-link text-light" })
+                            @Html.ActionLink("Rejestracja", "Register", "Account",null, new { @class = "nav-link text-light" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Wyloguj się", "Logout", "Account",null, new { @class = "nav-link text-light" })
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    @RenderSection("ScriptsBottom", required: false)
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿@model Restaurant_DCI.Models.Order
+
+@{
+    ViewBag.Title = "ExecutionOfTheOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="card">
+        <div class="card-header">
+            Realizacja zamówienia
+        </div>
+        <div class="card-body">
+            <div>
+                <p>Numer zamówienia: @Html.DisplayTextFor(m => Model.OrderId)</p>
+                <p>Data utworzenia: @Html.DisplayTextFor(m => Model.DateCreated)</p>
+                <p>Uwagi do zamówienia: @Html.DisplayTextFor(m => Model.Comment)</p>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Liczba</th>
+                    <th>Nazwa potrawy</th>
+                    <th>Wykonane</th>
+                </tr>
+                @foreach (var item in Model.OrderItems)
+                {
+
+                    <tr class=" list-group-item-action" id="@Html.DisplayFor(m=>item.OrderItemId)" onclick="displayRecipe(`@Html.DisplayTextFor(m=>item.Product.Recipe)`)">
+                        <td>
+                            @Html.DisplayFor(quantity => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(name => item.Product.Name)
+                        </td>
+                        <td>
+                            @if (!item.Done)
+                            {
+                                <input type="button" value="Zrobione" class="btn btn-success" onclick="location.href='@Url.Action("MakeOrderItem","Chef",new {orderItemId=item.OrderItemId,orderId=item.OrderId})'" />
+                            }
+                            else
+                            {
+                                @Html.CheckBoxFor(done => item.Done, htmlAttributes: new { @disabled = "disabled" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="form-group">
+                @Html.ActionLink("Powrót do zamówień.", "Orders", "Chef", routeValues: new { orderState = Model.OrderState }, null)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="showRecipe" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Przepis</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" id="recipe" readonly="readonly" name="recipe">Brak przepisu</textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ScriptsBottom{
+    <script type="text/javascript">
+        function displayRecipe(orderItemId) {
+            if (orderItemId != ``) {
+                $("#recipe").val(orderItemId);
+            } else {
+                $("#recipe").val("Brak przepisu");
+            }
+
+            $("#showRecipe").modal('show');
+            
+        }
+    </script>
+}
+

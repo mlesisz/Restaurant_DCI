@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Restaurant_DCI.Models.Product>
+
+
+@if (Model.Count() > 0)
+{
+    <h3>@ViewBag.category</h3>
+    if (Session["Permissions"] != null && Session["Permissions"].ToString() == "Chef")
+    {
+        foreach (var item in Model)
+        {
+            <a class="nav-link" href="@Url.Action("AddOrEditProduct","Chef",routeValues: new { productId = item.ProductId })">
+                <div class="list-group-item list-group-item-action">
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <h5 class="alert-heading">@Html.DisplayTextFor(m => item.Name)</h5>
+                            @Html.DisplayTextFor(m => item.Description)
+                        </div>
+                        <div class="col-xl-2 text-right"><p>@Html.DisplayTextFor(m => item.Price)zł</p></div>
+                    </div>
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <a class="nav-link" href="@Url.Action("AddToCart","Cart",routeValues: new { productId = item.ProductId })">
+                <div class="list-group-item list-group-item-action">
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <h5 class="alert-heading">@Html.DisplayTextFor(m => item.Name)</h5>
+                            @Html.DisplayTextFor(m => item.Description)
+                        </div>
+                        <div class="col-xl-2 text-right"><p>@Html.DisplayTextFor(m => item.Price)zł</p></div>
+                    </div>
+                </div>
+            </a>
+        }
+    }
+
+}
+else
+{
+    <h3>@ViewBag.category</h3>
+    <p>Brak ofert w tej kategorii.</p>
+}

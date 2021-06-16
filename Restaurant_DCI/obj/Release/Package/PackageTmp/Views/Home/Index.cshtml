@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="row justify-content-md-start">
+    <div class="col-md-4">
+        @if (Session["idUser"] != null)
+        {
+            <div class="card">
+                <div class="card-header">
+                    Witaj
+                </div>
+                <div class="card-body">
+                    <p>Id użytkownika: @Session["idUser"].ToString()</p>
+                    <a href="@Url.Action("Logout","Account")" class="btn btn-warning">Wyloguj</a>
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
