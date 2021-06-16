@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Data.Entity;
+using Restaurant_DCI.Models;
 
 namespace Restaurant_DCI
 {
@@ -13,6 +15,8 @@ namespace Restaurant_DCI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Database.SetInitializer(new DB_EntitiesSeeder());
         }
     }
 }
