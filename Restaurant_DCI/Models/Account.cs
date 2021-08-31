@@ -1,14 +1,16 @@
-﻿using Restaurant_DCI.Roles;
+﻿using Restaurant_DCI.RoleMethods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Restaurant_DCI.Contex;
 
 namespace Restaurant_DCI.Models
 {
-    public class Account : IRegisterUser, ILoginUser, IBrowsingOrdersClient, IBrowsingOrdersChef
+    public class Account : RegisterContex.IUser, LoginContex.IUser,BrowsingOrdersContex.IClient,
+        BrowsingOrdersContex.IChef
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

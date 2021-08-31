@@ -126,7 +126,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Properties\PublishProfiles\RestaurantDCI20210616212043 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -256,22 +255,20 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\DB_EntitiesSeeder.cs" />
     <Compile Include="Models\SessionManager.cs" />
-    <Compile Include="Roles\IBrowsingOrdersAccount.cs" />
-    <Compile Include="Roles\IBrowsingOrdersOrder.cs" />
-    <Compile Include="Roles\ICompleteTheOrderOrderItem.cs" />
-    <Compile Include="Roles\IEditingTheMenuProduct.cs" />
-    <Compile Include="Roles\IPlaceAnOrderCartItem.cs" />
-    <Compile Include="Roles\IPlaceAnOrderOrderPlaced.cs" />
-    <Compile Include="Roles\ISessionManager.cs" />
+    <Compile Include="RoleMethods\BrowsingOrdersRoleMethods.cs" />
+    <Compile Include="RoleMethods\CompleteTheOrderRoleMethods.cs" />
+    <Compile Include="RoleMethods\EditingTheMenuRoleMethods.cs" />
+    <Compile Include="RoleMethods\ISessionManager.cs" />
+    <Compile Include="RoleMethods\PlaceAnOrderRoleMethods.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roles\IBrowsingMemuProduct.cs" />
-    <Compile Include="Roles\ILoginUser.cs" />
-    <Compile Include="Roles\IRegisterUser.cs" />
+    <Compile Include="RoleMethods\BrowsingMemuRoleMethods.cs" />
+    <Compile Include="RoleMethods\LoginRoleMethods.cs" />
+    <Compile Include="RoleMethods\RegisterRoleMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -285,6 +282,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

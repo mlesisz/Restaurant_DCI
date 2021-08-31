@@ -5,16 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using System.Web;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
+using Restaurant_DCI.Contex;
 
 namespace Restaurant_DCI.Models
 {
-    public class Order : IPlaceAnOrderOrderPlaced, IBrowsingOrdersOrder
+    public class Order : PlaceAnOrderContex.IOrder, BrowsingOrdersContex.IOrder
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
-
         public int UserId { get; set; }
 
         public List<OrderItem> OrderItems { get; set; }
@@ -48,7 +48,6 @@ namespace Restaurant_DCI.Models
         [StringLength(50)]
         [Display(Name ="Kod pocztowy oraz Miejscowość")]
         public string CodeAndCity { get; set; }
-
     }
 
     public enum PaymentMethod

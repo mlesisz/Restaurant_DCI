@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Restaurant_DCI.Models;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
 
 namespace Restaurant_DCI.Contex
 {
     public class EditingTheMenuContex
     {
         public DB_Entities Db { get; private set; }
-        public IEditingTheMenuProduct Product { get; set; }
-        public EditingTheMenuContex(IEditingTheMenuProduct product, DB_Entities _db )
+        #region Roles and RolesInterfaces
+        public interface IProduct { }
+        public IProduct Product { get; set; }
+        #endregion
+
+        public EditingTheMenuContex(IProduct product, DB_Entities _db )
         {
             Db = _db;
             Product = product;

@@ -1,14 +1,18 @@
 ﻿using Restaurant_DCI.Models;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
 using System.Collections.Generic;
 
 namespace Restaurant_DCI.Contex
 {
     public class BrowsingMenuContex
     {
-        public IBrowsingMemuProduct Product { get; private set; }
+        #region Roles and RolesInterfaces
+        public interface IProduct { }
+        public IProduct Product { get; private set; }
+        #endregion
+
         public DB_Entities Db { get; private set; }
-        public BrowsingMenuContex(IBrowsingMemuProduct product, DB_Entities _db )
+        public BrowsingMenuContex(IProduct product, DB_Entities _db )
         {
             Product = product;
             Db = _db;

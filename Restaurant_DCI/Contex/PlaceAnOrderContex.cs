@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Restaurant_DCI.Roles;
+﻿using System.Collections.Generic;
+using Restaurant_DCI.RoleMethods;
 using Restaurant_DCI.Models;
 
 namespace Restaurant_DCI.Contex
 {
     public class PlaceAnOrderContex
     {
-        public IPlaceAnOrderCartItem CartItem { get; private set; }
+        #region Roles and RolesInterfaces
+        public interface ICartItem{ }
+        internal ICartItem CartItem { get; private set; }
+        public interface IOrder { }
+        public IOrder Order { get; set; }
+        #endregion
+
         public ISessionManager Session { get; private set; }
-        public IPlaceAnOrderOrderPlaced OrderPlaced { get; set; }
+        
         public DB_Entities Db { get; private set; }
-        public PlaceAnOrderContex(IPlaceAnOrderCartItem placeAnOrderCartItem,ISessionManager sessionManager)
+        public PlaceAnOrderContex(ICartItem cartItem,ISessionManager sessionManager)
         {
-            CartItem = placeAnOrderCartItem;
+            CartItem = cartItem;
             Session = sessionManager;
         }
-        public PlaceAnOrderContex(IPlaceAnOrderOrderPlaced orderPlaced, ISessionManager sessionManager, DB_Entities _db)
+        public PlaceAnOrderContex(IOrder orderPlaced, ISessionManager sessionManager, DB_Entities _db)
         {
-            OrderPlaced = orderPlaced;
+            Order = orderPlaced;
             Session = sessionManager;
             Db = _db;
         }
+
+        #region Interactions
         public void AddCartItemToSession()
         {
             CartItem.AddCartItemToSession(Session);
@@ -36,13 +41,14 @@ namespace Restaurant_DCI.Contex
         {
             CartItem.RemoveCartItemFromSession(Session);
         }
-        public List<CartItem> GetCarts()
+        public List<CartItem> GetCart()
         {
             return Session.GetCart();
         }
         public bool SaveOrder()
         {
-            return OrderPlaced.SaveOrder(Session,Db);
+            return Order.SaveOrder(Session,Db);
         }
+        #endregion
     }
 }

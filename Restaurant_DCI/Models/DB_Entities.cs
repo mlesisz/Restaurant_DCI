@@ -22,7 +22,6 @@ namespace Restaurant_DCI.Models
             modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
 
             base.OnModelCreating(modelBuilder);
-
         }
     }
 }

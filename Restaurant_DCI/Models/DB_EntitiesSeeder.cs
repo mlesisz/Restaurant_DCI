@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
 
 namespace Restaurant_DCI.Models
 {
@@ -15,8 +15,8 @@ namespace Restaurant_DCI.Models
                 FirstName = "Szef",
                 LastName = "Kuchni",
                 Email = "Chef@wp.pl",
-                Password = RegisterUserTraits.GetMD5("Chef12345"),
-                ConfirmPassword = RegisterUserTraits.GetMD5("Chef12345"),
+                Password = RegisterRoleMethods.GetMD5("Chef12345"),
+                ConfirmPassword = RegisterRoleMethods.GetMD5("Chef12345"),
                 Permissions = Permissions.Chef
             };
 

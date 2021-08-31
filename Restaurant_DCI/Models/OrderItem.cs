@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
+using Restaurant_DCI.Contex;
 
 namespace Restaurant_DCI.Models
 {
-    public class OrderItem : ICompleteTheOrderOrderItem
+    public class OrderItem : CompleteTheOrderContex.IOrderItem
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

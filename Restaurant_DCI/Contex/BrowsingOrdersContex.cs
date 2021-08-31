@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
 using Restaurant_DCI.Models;
 
 namespace Restaurant_DCI.Contex
 {
     public class BrowsingOrdersContex 
     {
-        public IBrowsingOrdersOrder Order { get; set; }
-        public IBrowsingOrdersChef Chef { get; set; }
-        public IBrowsingOrdersClient Client { get; set; }
+        #region Roles and RolesInterfaces
+        public interface IOrder { }
+        public IOrder Order { get; set; }
+        public interface IChef { }
+        public IChef Chef { get; set; }
+        public interface IClient { }
+        public IClient Client { get; set; }
         public DB_Entities Db { get; private set; }
+        #endregion
 
-        public BrowsingOrdersContex(IBrowsingOrdersOrder order, Account account,DB_Entities _db)
+        public BrowsingOrdersContex(IOrder order, Account account,DB_Entities _db)
         {
             Order = order;
             if(account.Permissions == Permissions.User)
@@ -26,7 +31,7 @@ namespace Restaurant_DCI.Contex
             }
             Db = _db;
         }
-        public BrowsingOrdersContex(IBrowsingOrdersOrder order, DB_Entities _db)
+        public BrowsingOrdersContex(IOrder order, DB_Entities _db)
         {
             Order = order;
             Db = _db;
@@ -38,7 +43,7 @@ namespace Restaurant_DCI.Contex
         }
         public List<Order> FindOrders()
         {
-            return Order.FindOrders(Chef,Client,Db);
+            return Order.FindOrders(Chef, Client, Db);
         }
     }
 }

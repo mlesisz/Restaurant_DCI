@@ -1,6 +1,6 @@
 ﻿using Restaurant_DCI.Contex;
 using Restaurant_DCI.Models;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +42,7 @@ namespace Restaurant_DCI.Controllers
             ViewBag.category = category;
             (IEnumerable<Product>,(IEnumerable<CartItem>,decimal)) tuple;
             tuple.Item1 = new BrowsingMenuContex(product, _db).FindProducts();
-            tuple.Item2.Item1 = new PlaceAnOrderContex(null, SessionManager).GetCarts();
+            tuple.Item2.Item1 = new PlaceAnOrderContex(null, SessionManager).GetCart();
             tuple.Item2.Item2 = 0;
             foreach (var item in tuple.Item2.Item1)
             {

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
+using Restaurant_DCI.Contex;
 
 namespace Restaurant_DCI.Models
 {
-    public class CartItem : IPlaceAnOrderCartItem
+    public class CartItem : PlaceAnOrderContex.ICartItem
     {
         public Product Product { get; set; }
         [Display(Name = "Liczba")]

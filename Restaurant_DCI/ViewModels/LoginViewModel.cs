@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Restaurant_DCI.Roles;
+using Restaurant_DCI.RoleMethods;
 
 namespace Restaurant_DCI.ViewModels
 {
